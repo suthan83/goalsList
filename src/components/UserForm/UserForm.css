@@ -1,0 +1,11 @@
+.form-control {
+  margin: 0.5rem 0;
+}
+
+.form-control label {
+  display: block;
+}
+
+.form-control input {
+  display: block;
+}
