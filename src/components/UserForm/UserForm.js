@@ -20,18 +20,31 @@ const UserForm = () => {
 
     const addUserHandler = (event) => {
         event.preventDefault();
+        
+        if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+            return;
+        }
+        if (+enteredAge < 1) {
+            return;
+        }
         console.log('form submitted with >> ', enteredUsername, enteredAge);
+        resetEnteredInput();
+    }
+
+    const resetEnteredInput = () => {
+        setEnteredUsername('');
+        setEnteredAge('');
     }
 
     return (
         <Card>
             <form className="form-control" action="submit" onSubmit={addUserHandler}>
                 <div>
-                    <input type="text" onChange={usernameChangeHandler}/>
+                    <input type="text" onChange={usernameChangeHandler} value={enteredUsername}/>
                     <label htmlFor="username">Username</label>
                 </div>
                 <div>
-                    <input type="text" onChange={ageChangeHandler}/>
+                    <input type="text" onChange={ageChangeHandler} value={enteredAge}/>
                     <label htmlFor="age" type="number">Age</label>
                 </div>
                 <div>
