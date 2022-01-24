@@ -4,7 +4,7 @@ import Button from "../UI/Button";
 
 import "./UserForm.css"
 
-const UserForm = () => {
+const UserForm = (props) => {
     const [enteredUsername, setEnteredUsername] = useState('')
     const [enteredAge, setEnteredAge] = useState('')
 
@@ -29,6 +29,7 @@ const UserForm = () => {
         }
         console.log('form submitted with >> ', enteredUsername, enteredAge);
         resetEnteredInput();
+        props.onAddUser({username: enteredUsername, age: enteredAge})
     }
 
     const resetEnteredInput = () => {
