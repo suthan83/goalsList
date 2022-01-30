@@ -3,10 +3,12 @@ import Card from "./../UI/Card"
 import Button from "../UI/Button";
 
 import "./UserForm.css"
+import ErrorModal from "../UI/ErrorModal";
 
 const UserForm = (props) => {
-    const [enteredUsername, setEnteredUsername] = useState('')
-    const [enteredAge, setEnteredAge] = useState('')
+    const [enteredUsername, setEnteredUsername] = useState('');
+    const [enteredAge, setEnteredAge] = useState('');
+    const [errorModal, setErrorModal] = useState();
 
     const usernameChangeHandler = (event) => {
         console.log('Username: ', event.target.value);
@@ -22,9 +24,11 @@ const UserForm = (props) => {
         event.preventDefault();
         
         if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+            setErrorModal({message: 'Neither username nor age cannot be empty'});
             return;
         }
         if (+enteredAge < 1) {
+            setErrorModal({message: 'Age cannot be a negative number'});
             return;
         }
         console.log('form submitted with >> ', enteredUsername, enteredAge);
@@ -37,7 +41,13 @@ const UserForm = (props) => {
         setEnteredAge('');
     }
 
+    const errorHandler = () => {
+        setErrorModal(null);
+    }
+
     return (
+        <div>
+        {errorModal && <ErrorModal title='An error occured!' message={errorModal.message} errorHandler={errorHandler}/>}
         <Card>
             <form className="form-control" action="submit" onSubmit={addUserHandler}>
                 <div>
@@ -53,6 +63,7 @@ const UserForm = (props) => {
                 </div>
             </form>
         </Card>
+        </div>
     )
 }
 
