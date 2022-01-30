@@ -11,32 +11,15 @@ const App = () => {
   const addUserHandler = (submittedUserData) => {
     const newUserData = {
       username: submittedUserData.username,
-      age: submittedUserData.age
+      age: submittedUserData.age,
+      id: Math.random().toString()
     }
-    // setUsersDate((users) => (...users, {
-    //   username: submittedData.username,
-    //   age: submittedData.age
-    // }))
 
     setUsersData((prevUsersData) => {
       return [...prevUsersData, newUserData]
     })
   }
 
-  const sampleData = [
-    {
-      username: "User #1",
-      age: 43
-    },
-    {
-      username: "Second User",
-      age: 18
-    },
-    {
-      username: "User #3",
-      age: 26
-    },
-  ]
   return (
     <div>
       <section className='user-form'>
